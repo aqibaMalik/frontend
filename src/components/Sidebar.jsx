@@ -1,73 +1,135 @@
-import { House, Camera, History, Settings, Info } from "lucide-react"
-import { LayoutDashboard, Sparkles, LogOut } from "lucide-react"
-export const Sidebar = () => {
+import { NavLink } from "react-router-dom"
+
+import {
+  LayoutDashboard,
+  Camera,
+  Users,
+  FolderKanban,
+  Info,
+  LogOut,
+} from "lucide-react"
+
+const Sidebar = () => {
   return (
     <div
-      className="d-flex flex-column justify-content-between bg-white border-end vh-100 p-4 shadow-sm"
-      style={{ width: "260px" }}
+      className="d-flex flex-column justify-content-between vh-100 bg-white border-end px-4 py-4 shadow-sm"
+      style={{ width: "280px" }}
     >
-      {/* LOGO */}
+      {/* TOP */}
       <div>
-        <div className="d-flex align-items-center gap-2 mb-5">
+        {/* LOGO */}
+        <div className="d-flex align-items-center gap-3 mb-5">
           <div
-            className="bg-primary text-white d-flex align-items-center justify-content-center rounded-3"
-            style={{ width: "50px", height: "50px" }}
+            className="d-flex align-items-center justify-content-center rounded-4 bg-primary text-white fw-bold"
+            style={{
+              width: "58px",
+              height: "58px",
+              fontSize: "24px",
+            }}
           >
             🤟
           </div>
 
-          <h2 className="fw-bold text-dark m-0">ansign</h2>
+          <div>
+            <h3 className="fw-bold text-dark m-0">Ansign</h3>
+
+            <span className="text-secondary small">AI Sign Translator</span>
+          </div>
         </div>
 
         {/* NAVIGATION */}
         <div className="d-flex flex-column gap-3">
           {/* HOME */}
-          <button className="btn btn-primary rounded-4 d-flex align-items-center gap-3 py-3 px-4 text-start fw-semibold">
-            <House size={22} />
+          <NavLink
+            to="/"
+            className={({ isActive }) =>
+              `btn ${isActive ? "btn-primary text-white" : "btn-light text-black"} rounded-4 d-flex align-items-center gap-3 px-4 py-3 fw-semibold shadow-sm text-start`
+            }
+          >
+            <LayoutDashboard size={22} />
             Home
-          </button>
+          </NavLink>
 
           {/* CAMERA FEED */}
-          <button className="btn btn-light rounded-4 d-flex align-items-center gap-3 py-3 px-4 text-dark fw-semibold border">
+          <NavLink
+            to="/camera"
+            className={({ isActive }) =>
+              `btn ${isActive ? "btn-primary text-white" : "btn-light text-black"} rounded-4 d-flex align-items-center gap-3 px-4 py-3 fw-semibold shadow-sm text-start`
+            }
+          >
             <Camera size={22} />
             Camera Feed
-          </button>
+          </NavLink>
 
-          {/* HISTORY */}
-          <button className="btn btn-light rounded-4 d-flex align-items-center gap-3 py-3 px-4 text-dark fw-semibold border">
-            <History size={22} />
-            History
-          </button>
+          {/* DEVELOPERS */}
+          <NavLink
+            to="/developers"
+            className={({ isActive }) =>
+              `btn ${isActive ? "btn-primary text-white" : "btn-light text-black"} rounded-4 d-flex align-items-center gap-3 px-4 py-3 fw-semibold shadow-sm text-start`
+            }
+          >
+            <Users size={22} />
+            Developers
+          </NavLink>
 
-          {/* SETTINGS */}
-          <button className="btn btn-light rounded-4 d-flex align-items-center gap-3 py-3 px-4 text-dark fw-semibold border">
-            <Settings size={22} />
-            Settings
-          </button>
+          {/* PROJECT */}
+          <NavLink
+            to="/project"
+            className={({ isActive }) =>
+              `btn ${isActive ? "btn-primary text-white" : "btn-light text-black"} rounded-4 d-flex align-items-center gap-3 px-4 py-3 fw-semibold shadow-sm text-start`
+            }
+          >
+            <FolderKanban size={22} />
+            Project
+          </NavLink>
 
           {/* ABOUT */}
-          <button className="btn btn-light rounded-4 d-flex align-items-center gap-3 py-3 px-4 text-dark fw-semibold border">
+          <NavLink
+            to="/about"
+            className={({ isActive }) =>
+              `btn ${isActive ? "btn-primary text-white" : "btn-light text-black"} rounded-4 d-flex align-items-center gap-3 px-4 py-3 fw-semibold shadow-sm text-start`
+            }
+          >
             <Info size={22} />
             About
-          </button>
+          </NavLink>
         </div>
       </div>
 
       {/* BOTTOM CARD */}
-      <div className="bg-light rounded-4 p-4 text-center border">
-        <div
-          className="bg-primary-subtle text-primary rounded-circle d-flex align-items-center justify-content-center mx-auto mb-3"
-          style={{ width: "60px", height: "60px" }}
-        >
-          💜
+      <div>
+        <div className="bg-light rounded-4 p-4 border">
+          <div
+            className="bg-primary-subtle text-primary rounded-4 d-flex align-items-center justify-content-center mb-4"
+            style={{
+              width: "70px",
+              height: "70px",
+              fontSize: "30px",
+            }}
+          >
+            ✨
+          </div>
+
+          <h5 className="fw-bold text-dark mb-2">Real-time AI Translation</h5>
+
+          <p className="text-secondary small mb-4 lh-base">
+            Breaking communication barriers through intelligent sign language
+            recognition.
+          </p>
+
+          <button className="btn btn-primary w-100 rounded-4 py-3 fw-semibold">
+            Start Translating
+          </button>
         </div>
 
-        <h5 className="fw-bold text-dark">Break Barriers</h5>
-
-        <p className="text-secondary small mb-0">
-          Building communication through sign language AI.
-        </p>
+        {/* LOGOUT */}
+        <button className="btn btn-light border w-100 rounded-4 d-flex align-items-center justify-content-center gap-2 py-3 mt-4 fw-semibold">
+          <LogOut size={20} />
+          Logout
+        </button>
       </div>
     </div>
   )
 }
+
+export default Sidebar

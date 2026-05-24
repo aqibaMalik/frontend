@@ -165,14 +165,13 @@ const Hero = ({ webcamRef, isStreaming, toggleStreaming }) => {
                 <h2 class="fs-3 fw-bold text-dark mb-4">Translation Output</h2>
 
                 <div
-                  className="bg-primary-subtle d-flex flex-column  felx  rounded-4 text-center py-5 mb-4  "
+                  className="bg-primary-subtle d-flex justify-content-center flex-column  rounded-4 text-center py-5 mb-4  "
                   style={{ minHeight: "700px" }}
                 >
-                  <h1>
+                  <h1 class="display-1 fw-bolder text-primary mb-3">
                     <PredictionBox />
                   </h1>
-
-                  <span className="badge bg-white text-primary px-4 py-2 rounded-pill fw-semibold">
+                  <span className="badge d-in bg-white text-primary px-4 py-2 rounded-pill fw-semibold">
                     Greeting
                   </span>
                 </div>

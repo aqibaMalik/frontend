@@ -9,7 +9,7 @@ export function PredictionBox({ prediction = "Hello" }) {
 
   return (
     <p className="text-uppercase tracking-wider text-secondary small fw-bold mb-1">
-      Detected Label <span style={{ color: textColor }}> {prediction} </span>
+      <span style={{ color: textColor }}> {prediction} </span>
     </p>
   )
 }
