@@ -1,17 +1,15 @@
 import { useState, useEffect, useRef } from "react"
-import { Container, Row, Col } from "react-bootstrap"
 import { io } from "socket.io-client"
 import CameraFeed from "../components/CameraFeed"
 import Controls from "../components/Controls"
-import {
-  PredictionBox as Prediction,
-  PredictionBox,
-} from "../components/PredictionBox" // New import
+import { PredictionBox } from "../components/PredictionBox"
+import { CiVideoOn } from "react-icons/ci"
+import Footer from "../components/Footer"
 
 // Connect to Python Backend (Flask-SocketIO / FastAPI)
 const socket = io("http://localhost:5000")
 
-export default function Home() {
+export function Home() {
   const webcamRef = useRef(null)
   const [isStreaming, setIsStreaming] = useState(false)
   const [prediction, setPrediction] = useState("Waiting for sign...")
@@ -74,49 +72,6 @@ export default function Home() {
 
   return (
     <>
-      <Hero
-        webcamRef={webcamRef}
-        isStreaming={isStreaming}
-        toggleStreaming={toggleStreaming}
-      />
-      {/* <Container classNameName="py-5">
-        <Row classNameName="justify-content-center text-center mb-4">
-          <Col lg={25}>
-            <h1 classNameName="display-4 fw-bold text-black">
-              See the Gesture.
-              <span classNameName="text-primary">Get the Meaning.</span>
-            </h1>
-            <p classNameName="text-muted d-flex flex-column fs-5 px-4">
-              Real-time Sign Language Recognition that converts gestures into
-              words instantly.
-              <span>Bringing communication, creating understanding.</span>
-            </p>
-          </Col>
-        </Row>
-
-        <Row classNameName="justify-content-center g-4">
-          {/* Left Side: Camera & Buttons */}
-      {/* <Col lg={6} md={8}>
-            <CameraFeed webcamRef={webcamRef} />
-            <Controls
-              isStreaming={isStreaming}
-              onToggleStream={toggleStreaming}
-            />
-          </Col>
-
-          { Right Side: Replaced with the Prediction Component }
-          <Col lg={4} md={8}>
-            <Prediction prediction={prediction} />
-          </Col>
-        </Row>
-      </Container> } */}
-    </>
-  )
-}
-
-const Hero = ({ webcamRef, isStreaming, toggleStreaming }) => {
-  return (
-    <>
       <div className="bg-light">
         <div className="container-fluid min-vh-100 py-5 px-4">
           <section className="text-center mb-5">
@@ -125,8 +80,8 @@ const Hero = ({ webcamRef, isStreaming, toggleStreaming }) => {
             </div>
 
             <h1 className="display-2 fw-bold text-dark lh-1 mb-4">
-              See the Gesture.
-              <span className="text-primary">Get the Meaning.</span>
+              <span>See the Gesture.</span>
+              <span className="text-primary ms-2">Get the Meaning.</span>
             </h1>
 
             <p className="fs-4 text-secondary fw-normal mx-auto mb-5">
@@ -139,9 +94,12 @@ const Hero = ({ webcamRef, isStreaming, toggleStreaming }) => {
             <div className="col-lg-7">
               <div className="card border-0 shadow-sm rounded-4 p-4 h-100">
                 <div className="d-flex justify-content-between align-items-center mb-4">
-                  <h2 className="fs-3 fw-bold text-dark m-0">
-                    Live Webcam Feed
-                  </h2>
+                  <div className="d-flex text-success align-items-center">
+                    <CiVideoOn size={28} />
+                    <h2 className="fs-3 ps-2 fw-bold text-dark m-0">
+                      Live Webcam Feed
+                    </h2>
+                  </div>
 
                   <span className="badge bg-success-subtle text-success px-3 py-2 rounded-pill fw-semibold">
                     ● Live
@@ -164,17 +122,7 @@ const Hero = ({ webcamRef, isStreaming, toggleStreaming }) => {
               <div className="card border-0 shadow-sm rounded-4 p-4">
                 <h2 class="fs-3 fw-bold text-dark mb-4">Translation Output</h2>
 
-                <div
-                  className="bg-primary-subtle d-flex justify-content-center flex-column  rounded-4 text-center py-5 mb-4  "
-                  style={{ minHeight: "700px" }}
-                >
-                  <h1 class="display-1 fw-bolder text-primary mb-3">
-                    <PredictionBox />
-                  </h1>
-                  <span className="badge d-in bg-white text-primary px-4 py-2 rounded-pill fw-semibold">
-                    Greeting
-                  </span>
-                </div>
+                <PredictionBox />
                 <Controls
                   isStreaming={isStreaming}
                   onToggleStream={toggleStreaming}
@@ -205,53 +153,7 @@ const Hero = ({ webcamRef, isStreaming, toggleStreaming }) => {
               </div>
             </div>
           </div>
-          <div className="row g-4 mt-3">
-            <div className="col-md-4">
-              <div className="card border-0 shadow-sm rounded-4 p-4 h-100">
-                <div className="bg-primary-subtle text-primary rounded-4 d-inline-flex align-items-center justify-content-center mb-4">
-                  ⚡
-                </div>
-
-                <h3 className="fs-3 fw-bold text-dark mb-3">
-                  Real-time Recognition
-                </h3>
-
-                <p className="fs-6 text-secondary mb-0 lh-lg">
-                  Instantly detect and recognize signs using your webcam.
-                </p>
-              </div>
-            </div>
-
-            <div className="col-md-4">
-              <div className="card border-0 shadow-sm rounded-4 p-4 h-100">
-                <div className="bg-success-subtle text-success rounded-4 d-inline-flex align-items-center justify-content-center mb-4">
-                  🎯
-                </div>
-
-                <h3 className="fs-3 fw-bold text-dark mb-3">High Accuracy</h3>
-
-                <p className="fs-6 text-secondary mb-0 lh-lg">
-                  AI models trained for precise and reliable predictions.
-                </p>
-              </div>
-            </div>
-
-            <div className="col-md-4">
-              <div className="card border-0 shadow-sm rounded-4 p-4 h-100">
-                <div className="bg-info-subtle text-info rounded-4 d-inline-flex align-items-center justify-content-center mb-4">
-                  🔒
-                </div>
-
-                <h3 className="fs-3 fw-bold text-dark mb-3">
-                  Private & Secure
-                </h3>
-
-                <p className="fs-6 text-secondary mb-0 lh-lg">
-                  Your webcam data stays private and securely processed.
-                </p>
-              </div>
-            </div>
-          </div>
+          <Footer />
         </div>
       </div>
     </>

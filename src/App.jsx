@@ -1,12 +1,9 @@
 import { Routes, Route } from "react-router-dom"
-import { Home as Main } from "./pages/Home"
-import InforCard from "./components/InfoCard"
+import { Home } from "./pages/Home"
 import Sidebar from "./components/Sidebar"
-
-const Camera = () => <h1>Camera</h1>
-const Developers = () => <InforCard type="developers" />
-const Project = () => <InforCard type="project" />
-const About = () => <InforCard type="about" />
+import CameraFeed from "./components/CameraFeed"
+import Developers from "./pages/developers"
+import Project from "./pages/Project"
 
 const App = () => {
   return (
@@ -24,17 +21,17 @@ const App = () => {
       >
         <Routes>
           {/* HOME PAGE */}
-          <Route path="/" element={<Main />} />
+          <Route path="/" element={<Home />} />
 
           {/* CAMERA FEED */}
-          <Route path="/camera" element={<Camera />} />
+          <Route path="/camera" element={<CameraFeed />} />
 
           {/* DEVELOPERS */}
           <Route path="/developers" element={<Developers />} />
           <Route path="/project" element={<Project />} />
 
           {/* ABOUT */}
-          <Route path="/about" element={<About />} />
+          <Route path="/about" element={<Project />} />
         </Routes>
       </div>
     </div>
